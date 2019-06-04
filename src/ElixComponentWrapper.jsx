@@ -4,30 +4,83 @@ import ReactDOM from 'react-dom';
 
 export default class ElixComponentWrapper extends React.Component {
 
-  updateRole(role) {
-    const Role = this.props[role];
-    if (Role) {
-      const template = document.createElement('template');
-      document.body.appendChild(template);
-      ReactDOM.render(<Role/>, template.content, () => {
-        const root = this.refs.root;
-        root.proxyRole = template;
-      });
+  componentDidMount() {
+    const metadata = this.constructor.metadata;
+    const events = metadata && metadata.events;
+    if (events) {
+      events.forEach(event => wireEventCallback(this, event));
     }
+    roles(this).forEach(role => updateRole(this, role));
   }
 
-  wireEventCallback(eventName) {
-    const nameParts = eventName.split('-');
-    const capitalizedParts = nameParts.map(part =>
-      `${part[0].toUpperCase()}${part.slice(1)}`
-    );
-    const callbackName = `on${capitalizedParts.join('')}`;
-    this.refs.root.addEventListener(eventName, event => {
-      const callback = this.props[callbackName];
-      if (callback) {
-        callback(event.detail);
+  componentDidUpdate(prevProps) {
+    roles(this).forEach(role => {
+      if (this.props[role] !== prevProps[role]) {
+        updateRole(this, role);
       }
+    })
+  }
+  
+  render() {
+    const tagName = tagNameFromClassName(this.constructor.name);
+    const propsToPass = {
+      ref: 'root'
+    };
+    for (const key in this.props) {
+      if (key !== 'children' && !key.startsWith('on')) {
+        propsToPass[attributeNameFromPropertyName(key)] = this.props[key];
+      }
+    }
+    return React.createElement(tagName, propsToPass, ...this.props.children);
+  }
+
+}
+
+
+function attributeNameFromPropertyName(propertyName) {
+  const uppercaseRegEx = /([A-Z])/g;
+  const attribute = propertyName.replace(uppercaseRegEx, '-$1').toLowerCase();
+  return attribute;
+}
+
+
+function roles(component) {
+  const metadata = component.constructor.metadata;
+  const roles = metadata && metadata.roles;
+  return roles || [];
+}
+
+
+function tagNameFromClassName(className) {
+  const uppercaseRegEx = /([A-Z])/g;
+  const baseName = className.replace(uppercaseRegEx, '-$1').toLowerCase();
+  return `elix${baseName}`;
+}
+
+
+function updateRole(component, role) {
+  const Role = component.props[role];
+  if (Role) {
+    const template = document.createElement('template');
+    document.body.appendChild(template);
+    ReactDOM.render(<Role/>, template.content, () => {
+      const root = component.refs.root;
+      root.proxyRole = template;
     });
   }
+}
 
+
+function wireEventCallback(component, eventName) {
+  const nameParts = eventName.split('-');
+  const capitalizedParts = nameParts.map(part =>
+    `${part[0].toUpperCase()}${part.slice(1)}`
+  );
+  const callbackName = `on${capitalizedParts.join('')}`;
+  component.refs.root.addEventListener(eventName, event => {
+    const callback = component.props[callbackName];
+    if (callback) {
+      callback(event.detail);
+    }
+  });
 }
