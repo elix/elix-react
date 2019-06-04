@@ -1,4 +1,5 @@
 import AutoSizeTextarea from '../src/AutoSizeTextarea.jsx';
+import CalendarMonthNavigator from '../src/CalendarMonthNavigator.jsx';
 import Carousel from '../src/Carousel.jsx';
 import CustomPageDot from './CustomPageDot.jsx';
 import ListBox from '../src/ListBox.jsx';
@@ -11,9 +12,15 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      date: new Date(),
       selectedIndex: 0
     };
+    this.dateChanged = this.dateChanged.bind(this);
     this.selectedIndexChanged = this.selectedIndexChanged.bind(this);
+  }
+
+  dateChanged(detail) {
+    this.setState(detail);
   }
 
   render() {
@@ -46,6 +53,11 @@ class App extends React.Component {
           <img src="resources/image05.jpg" alt="Red panda"/>
         </Carousel>
         <AutoSizeTextarea minimumRows="2" placeholder="Type all you want here!"/>
+        <CalendarMonthNavigator
+          date={this.state.date}
+          onDateChanged={this.dateChanged}
+          />
+        <div>{this.state.date.toDateString()}</div>
       </div>
     );
   }
