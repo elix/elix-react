@@ -1,9 +1,9 @@
 import { wrap } from './ElixComponentWrapper.jsx';
-import AutoSizeTextarea from 'elix/src/AutoSizeTextarea.js';
+import { default as ElixAutoSizeTextarea } from 'elix/src/AutoSizeTextarea.js';
 
 
-export default class extends wrap({
-  base: AutoSizeTextarea,
+export default class AutoSizeTextarea extends wrap({
+  base: ElixAutoSizeTextarea,
   events: [
     'change',
     'input'

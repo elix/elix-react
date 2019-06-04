@@ -1,9 +1,9 @@
 import { wrap } from './ElixComponentWrapper.jsx';
-import ListBox from 'elix/src/ListBox.js';
+import { default as ElixListBox } from 'elix/src/ListBox.js';
 
 
-export default class extends wrap({
-  base: ListBox,
+export default class ListBox extends wrap({
+  base: ElixListBox,
   events: [
     'selected-index-changed'
   ]
