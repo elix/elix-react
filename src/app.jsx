@@ -1,5 +1,5 @@
-import 'elix/src/ListBox';
 import items from './items';
+import ListBox from './ListBox.jsx';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
@@ -14,22 +14,24 @@ class App extends React.Component {
       items,
       selectedIndex: 0
     };
+
+    this.selectedIndexChanged = this.selectedIndexChanged.bind(this);
   }
 
-  componentDidMount() {
-    // We can listen to events on the Elix component, and use those events to
-    // update state.
-    this.refs.list.addEventListener('selected-index-changed', event => {
-      this.setState({
-        selectedIndex: event.detail.selectedIndex
-      });
-    });
-  }
+  // componentDidMount() {
+  //   // We can listen to events on the Elix component, and use those events to
+  //   // update state.
+  //   this.refs.list.addEventListener('selected-index-changed', event => {
+  //     this.setState({
+  //       selectedIndex: event.detail.selectedIndex
+  //     });
+  //   });
+  // }
 
   render() {
     // Create a div for each item in the list. Below we'll pass the items to the
     // ListBox component as children.
-    const itemElements = this.state.items && this.state.items.map(item => (
+    const items = this.state.items && this.state.items.map(item => (
       <div key={item}>{item}</div>
     ));
 
@@ -46,15 +48,19 @@ class App extends React.Component {
         <p>
           Selection: {this.state.items[this.state.selectedIndex]}
         </p>
-        <elix-list-box
-            ref="list"
+        <ListBox
             aria-label="Fruits"
-            selected-index={this.state.selectedIndex}
+            onSelectedIndexChanged={this.selectedIndexChanged}
+            selectedIndex={this.state.selectedIndex}
             style={{height: "250px", maxWidth: "300px"}}>
-          {itemElements}
-        </elix-list-box>
+          {items}
+        </ListBox>
       </div>
     );
+  }
+
+  selectedIndexChanged(selectedIndex) {
+    this.setState({ selectedIndex });
   }
 
 }
