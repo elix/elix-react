@@ -1,12 +1,8 @@
 import Carousel from './Carousel.jsx';
 import ListBox from './ListBox.jsx';
+import CustomPageDot from './CustomPageDot.jsx';
 import React from 'react';
 import ReactDOM from 'react-dom';
-
-
-const CustomButton = (props) => (
-  <button>{props.children}</button>
-);
 
 
 class App extends React.Component {
@@ -39,7 +35,7 @@ class App extends React.Component {
         <Carousel
           aria-label="Nature scenes"
           onSelectedIndexChanged={this.selectedIndexChanged}
-          proxyRole={CustomButton}
+          // proxyRole={CustomPageDot}
           selectedIndex={this.state.selectedIndex}
           style={{height: "250px", maxWidth: "300px"}}>
           <img src="resources/image01.jpg" alt="Mountain lake"/>
@@ -52,8 +48,8 @@ class App extends React.Component {
     );
   }
 
-  selectedIndexChanged(selectedIndex) {
-    this.setState({ selectedIndex });
+  selectedIndexChanged(detail) {
+    this.setState(detail);
   }
 
 }

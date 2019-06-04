@@ -1,21 +1,19 @@
 import 'elix/src/Carousel.js';
+import ElixComponentWrapper from './ElixComponentWrapper.jsx';
 import React from 'react';
-import ReactDOM from 'react-dom';
 
-export default class Carousel extends React.Component {
+
+export default class Carousel extends ElixComponentWrapper {
 
   componentDidMount() {
-    this.refs.root.addEventListener('selected-index-changed', event => {
-      const { selectedIndex } = event.detail;
-      if (this.props.onSelectedIndexChanged) {
-        this.props.onSelectedIndexChanged(selectedIndex);
-      }
-    });
-    applyProperties(this);
+    this.wireEventCallback('selected-index-changed');
+    this.updateRole('proxyRole');
   }
 
-  componentDidUpdate() {
-    applyProperties(this);
+  componentDidUpdate(prevProps) {
+    if (this.props.proxyRole !== prevProps.proxyRole) {
+      this.updateRole('proxyRole');
+    }
   }
   
   render() {
@@ -29,19 +27,4 @@ export default class Carousel extends React.Component {
     );
   }
 
-}
-
-const proxyRoleKey = Symbol('proxyRole');
-
-function applyProperties(component) {
-  const ProxyRole = component.props.proxyRole;
-  if (ProxyRole !== component[proxyRoleKey]) {
-    component[proxyRoleKey] = ProxyRole;
-    const template = document.createElement('template');
-    document.body.appendChild(template);
-    ReactDOM.render(ProxyRole({ children: [] }), template.content, () => {
-      const root = component.refs.root;
-      root.proxyRole = template;  
-    });
-  }
 }

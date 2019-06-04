@@ -1,15 +1,12 @@
 import 'elix/src/ListBox.js';
+import ElixComponentWrapper from './ElixComponentWrapper.jsx';
 import React from 'react';
 
-export default class ListBox extends React.Component {
+
+export default class ListBox extends ElixComponentWrapper {
 
   componentDidMount() {
-    this.refs.root.addEventListener('selected-index-changed', event => {
-      const { selectedIndex } = event.detail;
-      if (this.props.onSelectedIndexChanged) {
-        this.props.onSelectedIndexChanged(selectedIndex);
-      }
-    });
+    this.wireEventCallback('selected-index-changed');
   }
   
   render() {
