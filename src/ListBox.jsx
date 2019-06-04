@@ -4,9 +4,7 @@ import React from 'react';
 export default class ListBox extends React.Component {
 
   componentDidMount() {
-    // We can listen to events on the Elix component, and use those events to
-    // update state.
-    this.refs.list.addEventListener('selected-index-changed', event => {
+    this.refs.root.addEventListener('selected-index-changed', event => {
       const { selectedIndex } = event.detail;
       if (this.props.onSelectedIndexChanged) {
         this.props.onSelectedIndexChanged(selectedIndex);
@@ -17,7 +15,7 @@ export default class ListBox extends React.Component {
   render() {
     return (
       <elix-list-box
-          ref="list"
+          ref="root"
           selected-index={this.props.selectedIndex}
           style={this.props.style}>
         {this.props.children}
