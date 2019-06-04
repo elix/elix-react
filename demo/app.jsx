@@ -1,6 +1,7 @@
+import AutoSizeTextarea from '../src/AutoSizeTextarea.jsx';
 import Carousel from '../src/Carousel.jsx';
-import ListBox from '../src/ListBox.jsx';
 import CustomPageDot from './CustomPageDot.jsx';
+import ListBox from '../src/ListBox.jsx';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
@@ -44,6 +45,7 @@ class App extends React.Component {
           <img src="resources/image04.jpg" alt="Forest river"/>
           <img src="resources/image05.jpg" alt="Red panda"/>
         </Carousel>
+        <AutoSizeTextarea minimumRows="2" placeholder="Type all you want here!"/>
       </div>
     );
   }

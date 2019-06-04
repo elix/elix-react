@@ -22,7 +22,7 @@ export default class ElixComponentWrapper extends React.Component {
   }
   
   render() {
-    const tagName = tagNameFromClassName(this.constructor.metadata.base.name);
+    const tag = this.constructor.metadata.tag;
     const propsToPass = {
       ref: 'root'
     };
@@ -31,7 +31,8 @@ export default class ElixComponentWrapper extends React.Component {
         propsToPass[attributeNameFromPropertyName(key)] = this.props[key];
       }
     }
-    return React.createElement(tagName, propsToPass, ...this.props.children);
+    const children = this.props.children || [];
+    return React.createElement(tag, propsToPass, ...children);
   }
 
 }
@@ -40,6 +41,10 @@ export default class ElixComponentWrapper extends React.Component {
 export function wrap(metadata) {
   class Wrapped extends ElixComponentWrapper {}
   Wrapped.metadata = metadata;
+  if (!Wrapped.metadata.tag) {
+    const tag = tagFromClassName(metadata.base.name);
+    Wrapped.metadata.tag = tag;
+  }
   return Wrapped;
 }
 
@@ -58,7 +63,7 @@ function roles(component) {
 }
 
 
-function tagNameFromClassName(className) {
+function tagFromClassName(className) {
   const uppercaseRegEx = /([A-Z])/g;
   const baseName = className.replace(uppercaseRegEx, '-$1').toLowerCase();
   return `elix${baseName}`;
