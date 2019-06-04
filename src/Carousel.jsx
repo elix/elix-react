@@ -1,18 +1,13 @@
-import 'elix/src/Carousel.js';
-import ElixComponentWrapper from './ElixComponentWrapper.jsx';
+import { wrap } from './ElixComponentWrapper.jsx';
+import Carousel from 'elix/src/Carousel.js';
 
 
-export default class Carousel extends ElixComponentWrapper {
-
-  static get metadata() {
-    return {
-      events: [
-        'selected-index-changed'
-      ],
-      roles: [
-        'proxyRole'
-      ]
-    };
-  }
-
-}
+export default class extends wrap({
+  base: Carousel,
+  events: [
+    'selected-index-changed'
+  ],
+  roles: [
+    'proxyRole'
+  ]
+}) {}

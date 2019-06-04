@@ -1,5 +1,5 @@
-import Carousel from './Carousel.jsx';
-import ListBox from './ListBox.jsx';
+import Carousel from '../src/Carousel.jsx';
+import ListBox from '../src/ListBox.jsx';
 import CustomPageDot from './CustomPageDot.jsx';
 import React from 'react';
 import ReactDOM from 'react-dom';

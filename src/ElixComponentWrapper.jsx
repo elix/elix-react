@@ -22,7 +22,7 @@ export default class ElixComponentWrapper extends React.Component {
   }
   
   render() {
-    const tagName = tagNameFromClassName(this.constructor.name);
+    const tagName = tagNameFromClassName(this.constructor.metadata.base.name);
     const propsToPass = {
       ref: 'root'
     };
@@ -34,6 +34,13 @@ export default class ElixComponentWrapper extends React.Component {
     return React.createElement(tagName, propsToPass, ...this.props.children);
   }
 
+}
+
+
+export function wrap(metadata) {
+  class Wrapped extends ElixComponentWrapper {}
+  Wrapped.metadata = metadata;
+  return Wrapped;
 }
 
 
