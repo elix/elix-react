@@ -1,6 +1,7 @@
 import AutoSizeTextarea from '../src/AutoSizeTextarea.jsx';
 import CalendarMonthNavigator from '../src/CalendarMonthNavigator.jsx';
 import Carousel from '../src/Carousel.jsx';
+import DateComboBox from '../src/DateComboBox.jsx';
 import CustomPageDot from './CustomPageDot.jsx';
 import ListBox from '../src/ListBox.jsx';
 import React from 'react';
@@ -33,7 +34,8 @@ class App extends React.Component {
           aria-label="Nature scenes"
           onSelectedIndexChanged={this.selectedIndexChanged}
           selectedIndex={this.state.selectedIndex}
-          style={{height: "250px", maxWidth: "300px"}}>
+          style={{height: "250px", maxWidth: "300px"}}
+        >
           <div>Mountain lake</div>
           <div>Terraced farm</div>
           <div>Winter trees</div>
@@ -46,7 +48,8 @@ class App extends React.Component {
           onSelectedIndexChanged={this.selectedIndexChanged}
           // proxyRole={CustomPageDot}
           selectedIndex={this.state.selectedIndex}
-          style={{height: "250px", maxWidth: "300px"}}>
+          style={{height: "250px", maxWidth: "300px"}}
+        >
           <img src="resources/image01.jpg" alt="Mountain lake"/>
           <img src="resources/image02.jpg" alt="Terraced farm"/>
           <img src="resources/image03.jpg" alt="Winter trees"/>
@@ -57,8 +60,12 @@ class App extends React.Component {
         <CalendarMonthNavigator
           date={this.state.date}
           onDateChanged={this.dateChanged}
-          />
+        />
         <div>{this.state.date.toDateString()}</div>
+        <DateComboBox
+          date={this.state.date}
+          onDateChanged={this.dateChanged}
+        />
       </div>
     );
   }
