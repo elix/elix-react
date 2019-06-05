@@ -1,9 +1,9 @@
 import { wrap } from './ElixComponentWrapper.jsx';
 import { default as base } from 'elix/src/AutoCompleteInput.js';
 
-
 export default class AutoCompleteInput extends wrap({
   base,
   events: [
+    'input'
   ]
 }) {}
