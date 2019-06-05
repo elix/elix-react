@@ -1,9 +1,9 @@
 import { wrap } from './ElixComponentWrapper.jsx';
-import { default as ElixDateComboBox } from 'elix/src/DateComboBox.js';
+import { default as base } from 'elix/src/DateComboBox.js';
 
 
 export default class DateComboBox extends wrap({
-  base: ElixDateComboBox,
+  base,
   events: [
     'date-changed'
   ]

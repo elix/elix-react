@@ -1,9 +1,9 @@
 import { wrap } from './ElixComponentWrapper.jsx';
-import { default as ElixCalendarMonthNavigator } from 'elix/src/CalendarMonthNavigator.js';
+import { default as base } from 'elix/src/CalendarMonthNavigator.js';
 
 
 export default class CalendarMonthNavigator extends wrap({
-  base: ElixCalendarMonthNavigator,
+  base,
   events: [
     'date-changed'
   ]
