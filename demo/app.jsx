@@ -42,6 +42,7 @@ class App extends React.Component {
         </ListBox>
         <Carousel
           aria-label="Nature scenes"
+          arrowButtonOverlap="false"
           onSelectedIndexChanged={this.selectedIndexChanged}
           // proxyRole={CustomPageDot}
           selectedIndex={this.state.selectedIndex}

@@ -40,10 +40,16 @@ export default class ElixComponentWrapper extends React.Component {
 
 export function wrap(metadata) {
   class Wrapped extends ElixComponentWrapper {}
-  Wrapped.metadata = metadata;
-  if (!Wrapped.metadata.tag) {
-    const tag = tagFromClassName(metadata.base.name);
+  const base = metadata.base;
+  Wrapped.metadata = Object.assign({}, metadata);
+  if (!metadata.tag) {
+    const tag = tagFromClassName(base.name);
     Wrapped.metadata.tag = tag;
+  }
+  if (!metadata.roles) {
+    const properties = propertiesForClass(metadata.base);
+    const roles = properties.filter(key => key.endsWith('Role'));
+    Wrapped.metadata.roles = roles;
   }
   return Wrapped;
 }
@@ -54,6 +60,27 @@ function attributeNameFromPropertyName(propertyName) {
   const attribute = propertyName.replace(uppercaseRegEx, '-$1').toLowerCase();
   return attribute;
 }
+
+
+function propertiesForClass(classFn) {
+  // HTMLElement and its base classes have no properties we need to inspect.
+  if (classFn === HTMLElement) {
+    return [];
+  }
+  // Get properties for parent class.
+  const baseClass = Object.getPrototypeOf(classFn.prototype).constructor;
+  const baseProperties = propertiesForClass(baseClass);
+  // Get properties for this class.
+  const propertyNames = Object.getOwnPropertyNames(classFn.prototype);
+  const getterNames = propertyNames.filter(propertyName => {
+    const descriptor = Object.getOwnPropertyDescriptor(classFn.prototype, propertyName);
+    return descriptor && typeof descriptor.get === 'function';
+  });
+  // Merge.
+  const diff = getterNames.filter(name => baseProperties.indexOf(name) < 0);
+  return [...baseProperties, ...diff];
+}
+
 
 
 function roles(component) {

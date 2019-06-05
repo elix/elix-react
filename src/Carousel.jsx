@@ -6,8 +6,5 @@ export default class Carousel extends wrap({
   base: ElixCarousel,
   events: [
     'selected-index-changed'
-  ],
-  roles: [
-    'proxyRole'
   ]
 }) {}
