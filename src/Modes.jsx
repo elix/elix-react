@@ -6,5 +6,6 @@ export default class Modes extends wrap({
   events: [
     'items-changed',
     'selected-index-changed'
-  ]
+  ],
+  tag: 'elix-modes'
 }) {}

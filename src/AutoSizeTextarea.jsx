@@ -6,5 +6,6 @@ export default class AutoSizeTextarea extends wrap({
   events: [
     'change',
     'input'
-  ]
+  ],
+  tag: 'elix-auto-size-textarea'
 }) {}

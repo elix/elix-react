@@ -7,5 +7,6 @@ export default class ExpandableSection extends wrap({
     'closed',
     'opened',
     'opened-changed'
-  ]
+  ],
+  tag: 'elix-expandable-section'
 }) {}

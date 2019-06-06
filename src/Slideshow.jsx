@@ -6,5 +6,6 @@ export default class Slideshow extends wrap({
   events: [
     'items-changed',
     'selected-index-changed'
-  ]
+  ],
+  tag: 'elix-slideshow'
 }) {}

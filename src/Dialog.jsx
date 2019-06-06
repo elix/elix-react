@@ -7,5 +7,6 @@ export default class Dialog extends wrap({
     'closed',
     'opened',
     'opened-changed'
-  ]
+  ],
+  tag: 'elix-dialog'
 }) {}

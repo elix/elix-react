@@ -8,5 +8,6 @@ export default class ExpandablePanel extends wrap({
     'effect-phase-changed',
     'opened',
     'opened-changed'
-  ]
+  ],
+  tag: 'elix-expandable-panel'
 }) {}

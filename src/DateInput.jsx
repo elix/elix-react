@@ -6,5 +6,6 @@ export default class DateInput extends wrap({
   events: [
     'date-changed',
     'input'
-  ]
+  ],
+  tag: 'elix-date-input'
 }) {}

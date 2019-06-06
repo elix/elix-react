@@ -10,5 +10,6 @@ export default class DropdownList extends wrap({
     'opened',
     'opened-changed',
     'selected-index-changed'
-  ]
+  ],
+  tag: 'elix-dropdown-list'
 }) {}

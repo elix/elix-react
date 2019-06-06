@@ -6,5 +6,6 @@ export default class Tabs extends wrap({
   events: [
     'items-changed',
     'selected-index-changed'
-  ]
+  ],
+  tag: 'elix-tabs'
 }) {}

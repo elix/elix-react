@@ -5,5 +5,6 @@ export default class CalendarMonth extends wrap({
   base,
   events: [
     'date-changed'
-  ]
+  ],
+  tag: 'elix-calendar-month'
 }) {}

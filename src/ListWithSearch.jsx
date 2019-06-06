@@ -5,5 +5,6 @@ export default class ListWithSearch extends wrap({
   base,
   events: [
     'selected-index-changed'
-  ]
+  ],
+  tag: 'elix-list-with-search'
 }) {}

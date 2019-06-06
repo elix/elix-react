@@ -8,5 +8,6 @@ export default class DateComboBox extends wrap({
     'date-changed',
     'opened',
     'opened-changed'
-  ]
+  ],
+  tag: 'elix-date-combo-box'
 }) {}

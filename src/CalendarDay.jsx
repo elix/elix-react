@@ -5,5 +5,6 @@ export default class CalendarDay extends wrap({
   base,
   events: [
     'date-changed'
-  ]
+  ],
+  tag: 'elix-calendar-day'
 }) {}

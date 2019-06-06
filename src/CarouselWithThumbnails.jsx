@@ -6,5 +6,6 @@ export default class CarouselWithThumbnails extends wrap({
   events: [
     'items-changed',
     'selected-index-changed'
-  ]
+  ],
+  tag: 'elix-carousel-with-thumbnails'
 }) {}

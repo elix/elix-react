@@ -8,5 +8,6 @@ export default class MenuButton extends wrap({
     'menu-item-selected',
     'opened',
     'opened-changed'
-  ]
+  ],
+  tag: 'elix-menu-button'
 }) {}

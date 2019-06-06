@@ -6,5 +6,6 @@ export default class ListBox extends wrap({
   events: [
     'items-changed',
     'selected-index-changed'
-  ]
+  ],
+  tag: 'elix-list-box'
 }) {}

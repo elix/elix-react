@@ -7,5 +7,6 @@ export default class HamburgerMenuButton extends wrap({
     'closed',
     'opened',
     'opened-changed'
-  ]
+  ],
+  tag: 'elix-hamburger-menu-button'
 }) {}

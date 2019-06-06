@@ -6,5 +6,6 @@ export default class CrossfadeStage extends wrap({
   events: [
     'items-changed',
     'selected-index-changed'
-  ]
+  ],
+  tag: 'elix-crossfade-stage'
 }) {}

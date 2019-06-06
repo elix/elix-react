@@ -6,5 +6,6 @@ export default class SlidingPages extends wrap({
   events: [
     'items-changed',
     'selected-index-changed'
-  ]
+  ],
+  tag: 'elix-sliding-pages'
 }) {}

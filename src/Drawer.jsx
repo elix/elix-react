@@ -8,5 +8,6 @@ export default class Drawer extends wrap({
     'effect-phase-changed',
     'opened',
     'opened-changed'
-  ]
+  ],
+  tag: 'elix-drawer'
 }) {}

@@ -6,5 +6,6 @@ export default class CenteredStripHighlight extends wrap({
   events: [
     'items-changed',
     'selected-index-changed'
-  ]
+  ],
+  tag: 'elix-centered-strip-highlight'
 }) {}

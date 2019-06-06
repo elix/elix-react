@@ -1,4 +1,7 @@
 import { wrap } from './ElixComponentWrapper.jsx';
 import { default as base } from 'elix/src/SeamlessButton.js';
 
-export default class SeamlessButton extends wrap({ base }) {}
+export default class SeamlessButton extends wrap({
+  base,
+  tag: 'elix-seamless-button'
+}) {}

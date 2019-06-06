@@ -8,5 +8,6 @@ export default class Toast extends wrap({
     'effect-phase-changed',
     'opened',
     'opened-changed'
-  ]
+  ],
+  tag: 'elix-toast'
 }) {}

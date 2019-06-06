@@ -6,5 +6,6 @@ export default class Carousel extends wrap({
   events: [
     'items-changed',
     'selected-index-changed'
-  ]
+  ],
+  tag: 'elix-carousel'
 }) {}

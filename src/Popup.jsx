@@ -7,5 +7,6 @@ export default class Popup extends wrap({
     'closed',
     'opened',
     'opened-changed'
-  ]
+  ],
+  tag: 'elix-popup'
 }) {}

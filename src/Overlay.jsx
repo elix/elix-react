@@ -7,5 +7,6 @@ export default class Overlay extends wrap({
     'closed',
     'opened',
     'opened-changed'
-  ]
+  ],
+  tag: 'elix-overlay'
 }) {}

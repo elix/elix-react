@@ -6,5 +6,6 @@ export default class FilterListBox extends wrap({
   events: [
     'items-changed',
     'selected-index-changed'
-  ]
+  ],
+  tag: 'elix-filter-list-box'
 }) {}

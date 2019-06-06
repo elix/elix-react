@@ -5,5 +5,6 @@ export default class Input extends wrap({
   base,
   events: [
     'input'
-  ]
+  ],
+  tag: 'elix-input'
 }) {}

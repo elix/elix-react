@@ -7,5 +7,6 @@ export default class ComboBox extends wrap({
     'closed',
     'opened',
     'opened-changed'
-  ]
+  ],
+  tag: 'elix-combo-box'
 }) {}

@@ -6,5 +6,6 @@ export default class SlideshowWithPlayControls extends wrap({
   events: [
     'items-changed',
     'selected-index-changed'
-  ]
+  ],
+  tag: 'elix-slideshow-with-play-controls'
 }) {}

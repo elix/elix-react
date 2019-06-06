@@ -8,5 +8,6 @@ export default class ListComboBox extends wrap({
     'opened',
     'opened-changed',
     'selected-index-changed'
-  ]
+  ],
+  tag: 'elix-list-combo-box'
 }) {}

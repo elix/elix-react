@@ -8,5 +8,6 @@ export default class FilterComboBox extends wrap({
     'opened',
     'opened-changed',
     'selected-index-changed'
-  ]
+  ],
+  tag: 'elix-filter-combo-box'
 }) {}

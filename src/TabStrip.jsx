@@ -6,5 +6,6 @@ export default class TabStrip extends wrap({
   events: [
     'items-changed',
     'selected-index-changed'
-  ]
+  ],
+  tag: 'elix-tab-strip'
 }) {}

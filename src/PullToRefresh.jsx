@@ -5,5 +5,6 @@ export default class PullToRefresh extends wrap({
   base,
   events: [
     'refreshing-changed'
-  ]
+  ],
+  tag: 'elix-pull-to-refresh'
 }) {}

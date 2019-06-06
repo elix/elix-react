@@ -8,5 +8,6 @@ export default class AutoCompleteComboBox extends wrap({
     'opened',
     'opened-changed',
     'selected-index-changed'
-  ]
+  ],
+  tag: 'elix-auto-complete-combo-box'
 }) {}

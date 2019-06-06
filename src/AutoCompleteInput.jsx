@@ -5,5 +5,6 @@ export default class AutoCompleteInput extends wrap({
   base,
   events: [
     'input'
-  ]
+  ],
+  tag: 'elix-auto-complete-input'
 }) {}

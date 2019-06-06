@@ -7,5 +7,6 @@ export default class AlertDialog extends wrap({
     'closed',
     'opened',
     'opened-changed'
-  ]
+  ],
+  tag: 'elix-alert-dialog'
 }) {}

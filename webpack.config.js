@@ -2,9 +2,15 @@ var path = require('path');
 
 module.exports = {
 
-  entry: './demo/app.jsx',
+  devtool: 'source-map',
 
-  mode: 'development',
+  entry: {
+    'app': './demo/app.jsx',
+    'synchronizedListsDemo': './demo/SynchronizedLists.jsx'
+  },
+
+  // mode: 'development',
+  mode: 'production',
 
   module: {
     rules: [
@@ -17,7 +23,7 @@ module.exports = {
   },
 
   output: {
-    filename: 'app.js',
+    filename: '[name].js',
     path: path.resolve(__dirname, 'dist')
   },
 
