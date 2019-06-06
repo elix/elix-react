@@ -1,12 +1,14 @@
 import AutoSizeTextarea from '../src/AutoSizeTextarea.jsx';
 import CalendarMonthNavigator from '../src/CalendarMonthNavigator.jsx';
 import Carousel from '../src/Carousel.jsx';
-import DateComboBox from '../src/DateComboBox.jsx';
 import CustomPageDot from './CustomPageDot.jsx';
+import DateComboBox from '../src/DateComboBox.jsx';
 import ListBox from '../src/ListBox.jsx';
+import MenuButton from '../src/MenuButton.jsx';
+import MenuItem from '../src/MenuItem.jsx';
+import MenuSeparator from '../src/MenuSeparator.jsx';
 import React from 'react';
 import ReactDOM from 'react-dom';
-
 
 class App extends React.Component {
 
@@ -56,6 +58,17 @@ class App extends React.Component {
           <img src="resources/image04.jpg" alt="Forest river"/>
           <img src="resources/image05.jpg" alt="Red panda"/>
         </Carousel>
+        <MenuButton aria-label="Sample Menu">
+          <MenuItem>New Tab</MenuItem>
+          <MenuItem>New Window</MenuItem>
+          <MenuSeparator></MenuSeparator>
+          <MenuItem>History</MenuItem>
+          <MenuItem>Downloads</MenuItem>
+          <MenuItem>Bookmarks</MenuItem>
+          <MenuSeparator></MenuSeparator>
+          <MenuItem>Zoom</MenuItem>
+          <MenuItem>Settings</MenuItem>
+        </MenuButton>        
         <AutoSizeTextarea minimumRows="2" placeholder="Type all you want here!"/>
         <CalendarMonthNavigator
           date={this.state.date}
