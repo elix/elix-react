@@ -76,3 +76,13 @@ class App extends React.Component {
 ```
 
 The `detail` parameter to an event callback will be the same as the `event.detail` object included in the underlying `CustomEvent` object. You can deconstruct this parameter to extract the necessary event details, such as `selectedIndex` above.
+
+
+# Demos
+
+* [ListBox and Carousel](https://elix.github.io/elix-react/demos/listAndCarousel.html) synced together
+* [Calendar components](https://elix.github.io/elix-react/demos/calendar.html)
+* [MenuButton](https://elix.github.io/elix-react/demos/menuButton.html)
+* [AutoSizeTextarea](https://elix.github.io/elix-react/demos/autoSizeTextarea.html)
+
+Source for the above demos can be found in `demos/src`.
