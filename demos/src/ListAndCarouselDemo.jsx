@@ -1,5 +1,5 @@
-import Carousel from '../src/Carousel.jsx';
-import ListBox from '../src/ListBox.jsx';
+import Carousel from '../../src/Carousel.jsx';
+import ListBox from '../../src/ListBox.jsx';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
@@ -20,6 +20,7 @@ class App extends React.Component {
           aria-label="Nature scenes"
           onSelectedIndexChanged={this.selectedIndexChanged}
           selectedIndex={this.state.selectedIndex}
+          style={{ height: '250px', maxWidth: '300px' }}
         >
           <div>Mountain lake</div>
           <div>Terraced farm</div>
@@ -32,6 +33,7 @@ class App extends React.Component {
           arrowButtonOverlap="false"
           onSelectedIndexChanged={this.selectedIndexChanged}
           selectedIndex={this.state.selectedIndex}
+          style={{ height: '250px', maxWidth: '300px' }}
         >
           <img src="resources/image01.jpg" alt="Mountain lake"/>
           <img src="resources/image02.jpg" alt="Terraced farm"/>

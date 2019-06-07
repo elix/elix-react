@@ -5,12 +5,13 @@ module.exports = {
   devtool: 'source-map',
 
   entry: {
-    'app': './demo/app.jsx',
-    'synchronizedListsDemo': './demo/SynchronizedLists.jsx'
+    'autoSizeTextareaDemo': './demos/src/AutoSizeTextareaDemo.jsx',
+    'calendarDemo': './demos/src/CalendarDemo.jsx',
+    'menuButtonDemo': './demos/src/MenuButtonDemo.jsx',
+    'listAndCarouselDemo': './demos/src/ListAndCarouselDemo.jsx'
   },
 
-  // mode: 'development',
-  mode: 'production',
+  mode: 'development',
 
   module: {
     rules: [
@@ -24,7 +25,7 @@ module.exports = {
 
   output: {
     filename: '[name].js',
-    path: path.resolve(__dirname, 'dist')
+    path: path.resolve(__dirname, 'build')
   },
 
   resolve: {
