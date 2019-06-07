@@ -1,5 +1,7 @@
 This repository provides React components wrapping each of the web components in the [Elix library](https://component.kitchen/elix).
 
+_Note: We are currently evaluating whether the Elix project should officially maintain these React versions of the Elix components on an ongoing basis as a supported aspect of the Elix project. If this would be interesting to you, please let us know via a tweet to [@ElixElements](https://twitter.com/ElixElements)._
+
 
 ## Instantiating Elix components in JSX
 
