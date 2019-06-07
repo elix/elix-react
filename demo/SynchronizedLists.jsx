@@ -8,7 +8,6 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      date: new Date(),
       selectedIndex: 0
     };
     this.selectedIndexChanged = this.selectedIndexChanged.bind(this);
@@ -45,7 +44,8 @@ class App extends React.Component {
   }
 
   selectedIndexChanged(detail) {
-    this.setState(detail);
+    const { selectedIndex } = detail;
+    this.setState({ selectedIndex });
   }
 
 }

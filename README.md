@@ -1,67 +1,18 @@
-This repository shows how a React project can consume any web component, including any web component from the [Elix](https://component.kitchen/Elix) library.
+This repository provides React components wrapping each of the web components in the [Elix library](https://component.kitchen/elix).
 
 
-# Quick start
+## Instantiating Elix components in JSX
 
-Enter the following in a terminal window:
-
-```
-git clone git@github.com:elix/react-example.git
-cd react-example
-npm install
-npm run build
-npx http-server
-```
-
-Then open [http://localhost:8080](http://localhost:8080) to view the sample page.
-
-
-# Using web components in React
-
-Web components like the ones in the Elix library are defined as JavaScript classes that you can manipulate as markup in HTML or directly in your JavaScript/TypeScript code.
-
-
-## Instantiating web components in markup
-
-Load the source file for the desired Elix component as a module. You can bundle it into your application using a bundler like webpack, or load it directly as shown here:
-
-```html
-<html>
-  <head>
-    <script type="module" src="node_modules/elix/src/ListBox.js"></script>
-  </head>
-  <body>
-    <elix-list-box aria-label="Fruits" style="height: 250px; max-width: 300px">
-      <div>Acai</div>
-      <div>Akee</div>
-      <div>Apple</div>
-      <div>Apricot</div>
-      <div>Avocado</div>
-      <div>Banana</div>
-      <!-- etc. -->
-    </elix-list-box>
-  </body>
-</html>
-```
-
-Once the component module is loaded, you can then instantiate the component with its tag name. The tag name for the [ListBox](https://component.kitchen/elix/ListBox) component is `elix-list-box`. If desired, you can then set properties on the component as attributes.
-
-
-## Instantiating web components in JSX
-
-Each Elix component module exposes a default export that you can `import` into your JavaScript/TypeScript application.
+You can `import` the React Elix components in the `src` folder into your React application:
 
 ```jsx
-// Import the Elix components we want to use.
-import 'elix/src/ListBox.js';
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ListBox from 'elix-react/src/ListBox.jsx';
 
 class App extends React.Component {
-
   render() {
     return (
-      <elix-list-box aria-label="Fruits" selected-index="0">
+      <ListBox aria-label="Fruits">
         <div>Acai</div>
         <div>Akee</div>
         <div>Apple</div>
@@ -69,11 +20,59 @@ class App extends React.Component {
         <div>Avocado</div>
         <div>Banana</div>
         <!-- etc. -->
-      </elix-list-box>
+      </ListBox>
     );
+  }
+}
+```
+
+The React versions of the Elix components generally work like React components rather than HTML custom elements, as noted below:
+
+
+## Setting properties
+
+You can set properties using camelCase property names instead of hyphenated attribute names:
+
+```jsx
+<ListBox selectedIndex={0}></ListBox>
+```
+
+At this time, the React Elix components only support properties that are strings, or that can be coerced to and from strings (like the numeric `selectedIndex` above).
+
+
+## Listening to events
+
+You can listen to the custom events raised by an Elix component by defining an `on` callback in the usual React way:
+
+```jsx
+import React from 'react';
+import ListBox from 'elix-react/src/ListBox.jsx';
+
+class App extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedIndex: 0
+    };
+    this.selectedIndexChanged = this.selectedIndexChanged.bind(this);
+  }
+
+  render() {
+    return (
+      <ListBox
+        onSelectedIndexChanged={this.selectedIndexChanged}
+        selectedIndex={this.state.selectedIndex}
+      ></ListBox>
+    );
+  }
+
+  selectedIndexChanged(detail) {
+    const { selectedIndex } = detail;
+    this.setState({ selectedIndex });
   }
 
 }
 ```
 
-In JSX, you can reference the component by its tag name. You can then pass data to it as attributes. The sample above sets both the standard `aria-label` attribute and the custom `selected-index` attribute, which sets the `ListBox`'s `selectedIndex` property to the desired index. Normally your React application would track the `selectedIndex` as state and update that state by listening to an event on the `ListBox`; see `src/app.jsx` for more complete sample source code.
+The `detail` parameter to an event callback will be the same as the `event.detail` object included in the underlying `CustomEvent` object. You can deconstruct this parameter to extract the necessary event details, such as `selectedIndex` above.

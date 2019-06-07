@@ -1,9 +1,6 @@
 import AutoSizeTextarea from '../src/AutoSizeTextarea.jsx';
 import CalendarMonthNavigator from '../src/CalendarMonthNavigator.jsx';
-import Carousel from '../src/Carousel.jsx';
-import CustomPageDot from './CustomPageDot.jsx';
 import DateComboBox from '../src/DateComboBox.jsx';
-import ListBox from '../src/ListBox.jsx';
 import MenuButton from '../src/MenuButton.jsx';
 import MenuItem from '../src/MenuItem.jsx';
 import MenuSeparator from '../src/MenuSeparator.jsx';
@@ -15,11 +12,9 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      date: new Date(),
-      selectedIndex: 0
+      date: new Date()
     };
     this.dateChanged = this.dateChanged.bind(this);
-    this.selectedIndexChanged = this.selectedIndexChanged.bind(this);
   }
 
   dateChanged(detail) {
@@ -29,35 +24,6 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <p>
-          Selection: {this.state.selectedIndex}
-        </p>
-        <ListBox
-          aria-label="Nature scenes"
-          onSelectedIndexChanged={this.selectedIndexChanged}
-          selectedIndex={this.state.selectedIndex}
-          style={{height: "250px", maxWidth: "300px"}}
-        >
-          <div>Mountain lake</div>
-          <div>Terraced farm</div>
-          <div>Winter trees</div>
-          <div>Forest river</div>
-          <div>Red panda</div>
-        </ListBox>
-        <Carousel
-          aria-label="Nature scenes"
-          arrowButtonOverlap="false"
-          onSelectedIndexChanged={this.selectedIndexChanged}
-          // proxyRole={CustomPageDot}
-          selectedIndex={this.state.selectedIndex}
-          style={{height: "250px", maxWidth: "300px"}}
-        >
-          <img src="resources/image01.jpg" alt="Mountain lake"/>
-          <img src="resources/image02.jpg" alt="Terraced farm"/>
-          <img src="resources/image03.jpg" alt="Winter trees"/>
-          <img src="resources/image04.jpg" alt="Forest river"/>
-          <img src="resources/image05.jpg" alt="Red panda"/>
-        </Carousel>
         <MenuButton aria-label="Sample Menu">
           <MenuItem>New Tab</MenuItem>
           <MenuItem>New Window</MenuItem>
@@ -81,10 +47,6 @@ class App extends React.Component {
         />
       </div>
     );
-  }
-
-  selectedIndexChanged(detail) {
-    this.setState(detail);
   }
 
 }
