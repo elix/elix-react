@@ -2,6 +2,8 @@ This repository provides React components wrapping each of the web components in
 
 _Note: We are currently evaluating whether the Elix project should officially maintain these React versions of the Elix components on an ongoing basis as a supported aspect of the Elix project. If this would be interesting to you, please let us know via a tweet to [@ElixElements](https://twitter.com/ElixElements)._
 
+If you are simply interested in using the Elix elements in a React project as regular web components (and not as React components), see the [React example project](https://github.com/elix/react-example).
+
 
 ## Instantiating Elix components in JSX
 
