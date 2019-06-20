@@ -9,5 +9,15 @@ export default class MenuButton extends wrap({
     'opened',
     'opened-changed'
   ],
+  parts: [
+    'backdrop',
+    'frame',
+    'menu',
+    'popup',
+    'source'
+  ],
+  slots: [
+    'source'
+  ],
   tag: 'elix-menu-button'
 }) {}

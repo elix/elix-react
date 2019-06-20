@@ -7,8 +7,9 @@ module.exports = {
   entry: {
     'autoSizeTextareaDemo': './demos/src/AutoSizeTextareaDemo.jsx',
     'calendarDemo': './demos/src/CalendarDemo.jsx',
-    'menuButtonDemo': './demos/src/MenuButtonDemo.jsx',
-    'listAndCarouselDemo': './demos/src/ListAndCarouselDemo.jsx'
+    'customMenuButtonDemo': './demos/src/CustomMenuButtonDemo.jsx',
+    'listAndCarouselDemo': './demos/src/ListAndCarouselDemo.jsx',
+    'menuButtonDemo': './demos/src/MenuButtonDemo.jsx'
   },
 
   mode: 'development',
