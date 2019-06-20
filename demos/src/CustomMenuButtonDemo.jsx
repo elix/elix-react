@@ -5,27 +5,46 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 
-const CustomMenuItem = (props) => {
-  const style = {
-    fontFamily: 'Lato',
-    fontSize: '16px',
-    padding: '10px 15px'
-  };
-  return (
-    <MenuItem style={style}>{props.children}</MenuItem>
-  )
-}
+const ArrowIcon = (props) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style={props.style}>
+    <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" />
+    <path fill="none" d="M0 0h24v24H0V0z" />
+  </svg>
+);
 
 
-class App extends React.Component {
+class CustomMenuButton extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      opened: props.opened || false
+    };
+    this.openedChanged = this.openedChanged.bind(this);
+  }
+
+  openedChanged(detail) {
+    const opened = detail.opened;
+    this.setState({ opened });
+  }
 
   render() {
-    const menuButtonLabel = (
+    const opened = this.state.opened;
+
+    const rotation = opened ? '180deg' : '0deg';
+    const iconStyle = {
+      height: '18px',
+      transform: `rotate(${rotation})`,
+      transition: 'transform 325ms ease',
+      width: '18px'
+    };
+    const source = (
       <div style={{ display: 'flex', alignItems: 'center' }}>
-        Menu
-        <img src="resources/baseline-keyboard_arrow_down-24px.svg"/>
+        {this.props.source}
+        <ArrowIcon style={iconStyle}/>
       </div>
     );
+
     const menuStyle = {
       background: 'white',
       padding: '0'
@@ -37,16 +56,49 @@ class App extends React.Component {
     };
     const sourceStyle = {
       backgroundColor: 'white',
-      border: 'none'
+      border: 'none',
+      color: opened ? '#3c9fb9' : '',
+      fill: opened ? '#3c9fb9' : ''
     };
+
+    return (
+      <MenuButton
+        ref="inner"
+        aria-label={this.props['aria-label']}
+        frameStyle={frameStyle}
+        menuStyle={menuStyle}
+        opened={opened}
+        onOpenedChanged={this.openedChanged}
+        source={source}
+        sourceStyle={sourceStyle}>
+        {this.props.children}
+      </MenuButton>
+    );
+  }
+
+}
+
+
+const CustomMenuItem = (props) => {
+  const style = {
+    fontFamily: 'Lato',
+    fontSize: '16px',
+    padding: '10px 15px'
+  };
+  return (
+    <MenuItem style={style}>{props.children}</MenuItem>
+  );
+}
+
+
+class App extends React.Component {
+
+  render() {
     return (
       <div>
-        <MenuButton
+        <CustomMenuButton
             aria-label="Sample Menu"
-            source={menuButtonLabel}
-            frameStyle={frameStyle}
-            menuStyle={menuStyle}
-            sourceStyle={sourceStyle}>
+            source="Menu">
           <CustomMenuItem>New Tab</CustomMenuItem>
           <CustomMenuItem>New Window</CustomMenuItem>
           <MenuSeparator></MenuSeparator>
@@ -56,7 +108,7 @@ class App extends React.Component {
           <MenuSeparator></MenuSeparator>
           <CustomMenuItem>Zoom</CustomMenuItem>
           <CustomMenuItem>Settings</CustomMenuItem>
-        </MenuButton>
+        </CustomMenuButton>
       </div>
     );
   }
