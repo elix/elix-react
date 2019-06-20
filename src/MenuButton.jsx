@@ -20,4 +20,10 @@ export default class MenuButton extends wrap({
     'source'
   ],
   tag: 'elix-menu-button'
-}) {}
+}) {
+
+  get items() {
+    return this.refs.root.items;
+  }
+
+}

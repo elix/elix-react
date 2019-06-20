@@ -23,9 +23,17 @@ class CustomMenuButton extends React.Component {
     this.openedChanged = this.openedChanged.bind(this);
   }
 
+  get items() {
+    return this.refs.inner.items;
+  }
+
   openedChanged(detail) {
-    const opened = detail.opened;
-    this.setState({ opened });
+    this.setState({
+      opened: detail.opened
+    });
+    if (this.props.onOpenedChanged) {
+      this.props.onOpenedChanged(detail);
+    }
   }
 
   render() {
@@ -52,7 +60,8 @@ class CustomMenuButton extends React.Component {
     const frameStyle = {
       border: 'solid 1px #dcdcdc',
       borderTop: 'solid 3px #43b2cf',
-      boxShadow: '2px 2px 5px rgba(0, 0, 0, 0.33)'
+      boxShadow: 'none'
+      // boxShadow: '2px 2px 5px rgba(0, 0, 0, 0.33)'
     };
     const sourceStyle = {
       backgroundColor: 'white',
@@ -68,6 +77,7 @@ class CustomMenuButton extends React.Component {
         frameStyle={frameStyle}
         menuStyle={menuStyle}
         opened={opened}
+        onClosed={this.props.onClosed}
         onOpenedChanged={this.openedChanged}
         source={source}
         sourceStyle={sourceStyle}>
@@ -83,32 +93,58 @@ const CustomMenuItem = (props) => {
   const style = {
     fontFamily: 'Lato',
     fontSize: '16px',
-    padding: '10px 15px'
+    padding: '10px 15px',
+    whiteSpace: 'nowrap'
   };
   return (
-    <MenuItem style={style}>{props.children}</MenuItem>
+    <MenuItem generic={false} style={style}>{props.children}</MenuItem>
   );
 }
 
 
 class App extends React.Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedItemText: null
+    };
+    this.openedChanged = this.openedChanged.bind(this);
+  }
+
+  openedChanged(detail) {
+    if (!detail.opened) {
+      const closeResult = detail.closeResult;
+      const selectedItemText = closeResult != null && closeResult >= 0 ?
+        this.refs.menuButton.items[closeResult].textContent :
+        null;
+      this.setState({ selectedItemText });
+    }
+  }
+
   render() {
+    const selectedItemText = this.state.selectedItemText;
+    const result = selectedItemText ?
+      (<p>You picked {selectedItemText}</p>) :
+      '';
     return (
       <div>
         <CustomMenuButton
+            ref="menuButton"
             aria-label="Sample Menu"
+            onOpenedChanged={this.openedChanged}
             source="Menu">
           <CustomMenuItem>New Tab</CustomMenuItem>
           <CustomMenuItem>New Window</CustomMenuItem>
-          <MenuSeparator></MenuSeparator>
+          <MenuSeparator/>
           <CustomMenuItem>History</CustomMenuItem>
           <CustomMenuItem>Downloads</CustomMenuItem>
           <CustomMenuItem>Bookmarks</CustomMenuItem>
-          <MenuSeparator></MenuSeparator>
+          <MenuSeparator/>
           <CustomMenuItem>Zoom</CustomMenuItem>
           <CustomMenuItem>Settings</CustomMenuItem>
         </CustomMenuButton>
+        {result}
       </div>
     );
   }
