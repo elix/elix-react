@@ -1,3 +1,4 @@
+import Menu from '../../src/Menu.jsx';
 import MenuButton from '../../src/MenuButton.jsx';
 import MenuItem from '../../src/MenuItem.jsx';
 import MenuSeparator from '../../src/MenuSeparator.jsx';
@@ -10,6 +11,11 @@ const ArrowIcon = (props) => (
     <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" />
     <path fill="none" d="M0 0h24v24H0V0z" />
   </svg>
+);
+
+
+const CustomMenu = (props) => (
+  <Menu generic={false}>{props.children}</Menu>
 );
 
 
@@ -75,6 +81,7 @@ class CustomMenuButton extends React.Component {
         ref="inner"
         aria-label={this.props['aria-label']}
         frameStyle={frameStyle}
+        menuRole={CustomMenu}
         menuStyle={menuStyle}
         opened={opened}
         onClosed={this.props.onClosed}
@@ -89,16 +96,43 @@ class CustomMenuButton extends React.Component {
 }
 
 
-const CustomMenuItem = (props) => {
-  const style = {
-    fontFamily: 'Lato',
-    fontSize: '16px',
-    padding: '10px 15px',
-    whiteSpace: 'nowrap'
-  };
-  return (
-    <MenuItem generic={false} style={style}>{props.children}</MenuItem>
-  );
+class CustomMenuItem extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      selected: props.selected || false
+    };
+    this.selectedChanged = this.selectedChanged.bind(this);
+  }
+
+  render() {
+    const selected = this.state.selected;
+    const style = {
+      backgroundColor: selected ? '#ecf7fa' : '',
+      color: selected ? '#3c9fb9' : '',
+      fontFamily: 'Lato',
+      fontSize: '16px',
+      padding: '10px 15px',
+      whiteSpace: 'nowrap'
+    };
+    return (
+      <MenuItem
+        generic={false}
+        onSelectedChanged={this.selectedChanged}
+        style={style}
+      >
+        {this.props.children}
+      </MenuItem>
+    );
+  }
+
+  selectedChanged(detail) {
+    this.setState({
+      selected: detail.selected
+    });
+  }
+
 }
 
 
@@ -130,10 +164,11 @@ class App extends React.Component {
     return (
       <div>
         <CustomMenuButton
-            ref="menuButton"
-            aria-label="Sample Menu"
-            onOpenedChanged={this.openedChanged}
-            source="Menu">
+          ref="menuButton"
+          aria-label="Sample Menu"
+          onOpenedChanged={this.openedChanged}
+          source="Menu"
+        >
           <CustomMenuItem>New Tab</CustomMenuItem>
           <CustomMenuItem>New Window</CustomMenuItem>
           <MenuSeparator/>

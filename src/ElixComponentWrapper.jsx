@@ -130,7 +130,7 @@ function updateRole(component, role) {
     document.body.appendChild(template);
     ReactDOM.render(<Role/>, template.content, () => {
       const root = component.refs.root;
-      root.proxyRole = template;
+      root[role] = template;
     });
   }
 }
